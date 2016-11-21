@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+
+.form-heading {
+	margin-bottom: 2.5em;
+}
+
+div.input-group {
+			margin-left: 10%;
+	padding-bottom: 1em;
+	width: 80%;
+}
+
+div.input-group::after {
+	content:"";
+	display:table;
+	clear: both;
+}
+
+.input-control input {
+	width: 90%;
+}
+
+.input-label {
+	display: inline-block;
+	float: left;
+	padding-top: .5em;
+	padding-bottom: .5em;
+	width: 45%;
+	text-align: left;
+}
+
+.input-control {
+	width: 55%;
+	float: left;
+}
+
+div.input-control button {
+	float: left;
+	margin-left: 35%;
+}
