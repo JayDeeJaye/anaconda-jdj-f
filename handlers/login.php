@@ -6,8 +6,6 @@ class SessionModel {
 	public $userName;
 	public $sessionId;
 	public $isConnected;
-	public $status;
-	public $infoText;
 	
 	function __construct($name = null) {
 		if (!empty($name)) {
@@ -19,10 +17,9 @@ class SessionModel {
 	}
 	
 	function login($pwd) {
-		$this->status = "ERROR";
 		$this->isConnected = false;
 		$db = new Database();
-		$rows = $db->queryData("select username,password from users where username='$this->userName'");
+		$rows = $db->get("select username,password from users where username='$this->userName'");
 		if (count($rows) == 1) {
 			if ($pwd == $rows[0]['password']) {
 				$this->sessionId = session_id();

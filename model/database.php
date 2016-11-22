@@ -13,7 +13,7 @@ class Database {
 	}
 
 	// Execute a query and return all results in an array of associative arrays
-	function queryData($sql) {
+	function get($sql) {
 		$result = array();
 		$res = $this->dbConn->query($sql);
 		while ($row = $res->fetch_assoc()) {

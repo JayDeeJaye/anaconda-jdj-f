@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <html>
 	<head>
 		<title>Battleship!</title>
@@ -11,15 +14,15 @@
 				<p>New User Signup</p>
 				<span style="color:red;">
 					<?php 
-						if (empty($model->infoText)) {
-							echo '<p></p>';
+						if (empty($_SESSION['infotext'])) {
+							echo '<p>&nbsp;</p>';
 						} else {
-							echo "<p> $model->infoText </p>";
+							echo '<p> '.$_SESSION['infotext'].' </p>';
 						}
 					?>
 				</span>
 			</div>
-			<form>
+			<form action="handlers/register.php" method="post">
 				<div class="input-group">
 					<label class="input-label">New Username: </label><div class="input-control"><input type="text" name="username"></div>
 				</div>
@@ -37,3 +40,6 @@
 		</div>
 	</body>
 </html>
+<?php 
+unset($_SESSION['infotext']);
+?>
