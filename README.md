@@ -19,14 +19,20 @@ I've broken down the project assignment into a list of requirements in the form 
     * warzone database
     * warzone.user table
     * index.php (launch view)
-    * handlers/login.php
-    * model/database.php
+    * handlers/login.php (SessionModel class)
+    * model/database.php (Database interaction class)
 - [x] As a Player, if I fail to authenticate, I want to see a message saying so
     * $_SESSION array elements for feedback (I know it's not true MVC)
-- [ ] As a potential Player, I want to register with Battleship so that I can play
-- [ ] As the Game, I want Players to ask to sign up from the launch page if they don't have a login already
-- [ ] As the Game, I shall require all Players to have unique usernames
-- [ ] As the Game, I want Players to type their password twice exactly the same way in order to complete the signup process
+- [x] As a potential Player, I want to register with Battleship so that I can play
+    * signup.php (new user view)
+    * handlers/register.php (UserModel class)
+    * New Database class method: create
+- [x] As the Game, I want Players to ask to sign up from the launch page if they don't have a login already
+    * "New Sign Up" button on index.php linking to signup.php  
+- [x] As the Game, I shall require all Players to have unique usernames
+    * New UserModel method: exists
+- [x] As the Game, I want Players to type their password twice exactly the same way in order to complete the signup process
+    * New UserModel method: passwordMatches
 - [ ] As the Game, I shall allow a Player to be logged in only once from a single location or browser instance
 - [ ] As a Player, I want to completely sign out of the game, by using Sign Out
 - [ ] As a Player, I want to complete sign out of the game by closing my browser window

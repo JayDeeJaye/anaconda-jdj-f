@@ -42,4 +42,4 @@ if ($model->isConnected) {
 } else {
 	$_SESSION['infotext'] = "Invalid login, please try again.";
 }
-header('Location:./');
+header('Location: ../index.php');

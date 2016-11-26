@@ -21,7 +21,9 @@ class UserModel {
 	}
 	
 	function register() {
-		return true;
+		// Insert a new user record into the database
+		$sql = "INSERT INTO users (username,password) VALUES ('".$this->userName."', '".$this->password."')";
+		return $this->db->create($sql);
 	}
 	
 	function passwordMatches($pwd) {
@@ -34,7 +36,8 @@ if (empty($_POST['username']) ||
 	empty($_POST['passwordAgain'])) {
 		
 	$_SESSION['infotext'] = 'All fields are required. Please try again';
-	header('Location: /signup.php');
+	header('Location: ../signup.php');
+	exit();
 }
 
 $username = $_POST['username'];
@@ -52,19 +55,21 @@ if ($model->exists()) {
 	// 	header("Location: http://$host$uri/$extra");
 	// 	exit;
 		
-	header('Location: /signup.php');
+	header('Location: ../signup.php');
+	exit();
 }
 
 if (!$model->passwordMatches($confirmPwd)) {
 	$_SESSION['infotext'] = 'Passwords do not match. Please try again';
-	header('Location: /signup.php');
+	header('Location: ../signup.php');
+	exit();
 }	
 
 if ($model->register()) {
 	// TODO: redirect to game dashboard
 	$_SESSION['infotext'] = 'Congratulations! You\'re a Player';
-	header('Location: /signup.php');
-} else {
+	header('Location: ../signup.php');
+	} else {
 	$_SESSION['infotext'] = 'Oops! Something bad happened. Contact the administrator';
-	header('Location: /signup.php');
+	header('Location: ../signup.php');
 }
