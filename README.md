@@ -12,8 +12,12 @@ Prerequisites:
 3. Create the application database using sql/warzone.sql
 4. Create a MySQL user named warzone and grant database privileges to it. If you want to set a password, feel free to do so. You will need to update models/database.php with your specifics.
 
-## Project Requirements 
+## Contributors
+
 I've broken down the project assignment into a list of requirements in the form of Agile user stories. Some of them have dependenicies, but for the most part they can be worked on in parallel by team members.
+
+### TO DO
+
 - [x] As the Game, I require Players to login with a username and password
     * Basic design and strategy: "light" MVC architecture, using models, controllers/handlers, and views without a router
     * warzone database
@@ -53,7 +57,4 @@ I've broken down the project assignment into a list of requirements in the form 
 - [ ] As a Player whose invitation to play has been turned down, I want to receive notice of the acceptance
 - [ ] As two Players who have agreed to play, we want to be taken into the game arena
 
-## Contributors
-
-TO DO
 
