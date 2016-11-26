@@ -36,7 +36,10 @@ I've broken down the project assignment into a list of requirements in the form 
 - [ ] As the Game, I shall allow a Player to be logged in only once from a single location or browser instance
 - [ ] As a Player, I want to completely sign out of the game, by using Sign Out
 - [ ] As a Player, I want to complete sign out of the game by closing my browser window
-- [ ] As a Player, I want to be taken to the game lobby after successfully logging in
+- [x] As a Player, I want to be taken to the game lobby after successfully logging in
+    * New view home.php
+    * New session variable userName to indicate login status
+    * New login and register flow to direct to home.php
 - [ ] As a Player, I want to see my name in a greeting in the Lobby
 - [ ] As a Player, I want to see who else is logged in and not engaged in a game
 - [ ] As a Player, I want to invite another unengaged Player to start a game with me
