@@ -37,9 +37,12 @@ $model = new SessionModel($username);
 $model->login($password);
 
 if ($model->isConnected) {
-	// TODO: go to launch page
-	$_SESSION['infotext'] = "Congratulations, you're logged in!";
+	// go to the home dashboard
+	$_SESSION['userName'] = $username;
+	header("Location: ../home.php");
+	exit();
 } else {
+	// Go back to the login page
 	$_SESSION['infotext'] = "Invalid login, please try again.";
 }
 header('Location: ../index.php');

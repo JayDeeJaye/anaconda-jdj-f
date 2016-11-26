@@ -22,7 +22,7 @@
 					?>
 				</span>
 			</div>
-			<form action="login.php" method="post">
+			<form action="handlers/login.php" method="post">
 				<div class="input-group">
 					<label class="input-label">Username: </label><div class="input-control"><input type="text" name="username"></div>
 				</div>

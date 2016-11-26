@@ -66,10 +66,12 @@ if (!$model->passwordMatches($confirmPwd)) {
 }	
 
 if ($model->register()) {
-	// TODO: redirect to game dashboard
-	$_SESSION['infotext'] = 'Congratulations! You\'re a Player';
-	header('Location: ../signup.php');
-	} else {
+	// TODO: Register the user's session
+	// Go into the dashboard
+	$_SESSION['userName'] = $username;
+	header('Location: ../home.php');
+	exit();
+} else {
 	$_SESSION['infotext'] = 'Oops! Something bad happened. Contact the administrator';
 	header('Location: ../signup.php');
 }
