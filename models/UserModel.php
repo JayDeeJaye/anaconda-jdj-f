@@ -30,12 +30,3 @@ class UserModel
 		return ($pwd == $this->password);
 	}
 }
-
-if (empty($_POST['username']) ||
-		empty($_POST['password']) ||
-		empty($_POST['passwordAgain'])) {
-
-			$_SESSION['infotext'] = 'All fields are required. Please try again';
-			header('Location: ../signup.php');
-			exit();
-		}

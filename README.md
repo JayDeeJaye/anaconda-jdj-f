@@ -34,7 +34,7 @@ I've broken down the project assignment into a list of requirements in the form 
   [ ] Refactor: encrypted password storage
     * Store passwords in users with salt and SHA encryption
     * Repeat encryption scheme when comparing passwords for authentication
-  [ ] Refactor: SessionModel reorganizaton
+  [x] Refactor: SessionModel reorganizaton
     * Separate SessionModel class into its own file
     * Add session state query to constructor
 - [x] As the Game, I want Players to ask to sign up from the launch page if they don't have a login already
@@ -44,7 +44,11 @@ I've broken down the project assignment into a list of requirements in the form 
 - [x] As the Game, I want Players to type their password twice exactly the same way in order to complete the signup process
     * New UserModel method: passwordMatches
 - [ ] As the Game, I shall allow a Player to be logged in only once from a single location or browser instance
-- [ ] As a Player, I want to completely sign out of the game, by using Sign Out
+- [x] As a Player, I want to completely sign out of the game, by using Logout
+    * New handler: handlers/logout.php
+    * New SessionModel method logout
+    * New Database method delete
+    * New home.php page button Logout
 - [ ] As a Player, I want to complete sign out of the game by closing my browser window
 - [x] As a Player, I want to be taken to the game lobby after successfully logging in
     * New view home.php
@@ -56,6 +60,7 @@ I've broken down the project assignment into a list of requirements in the form 
     * New table: invitations
     * New api: api/OnlinePlayers.php
     * New api: api/Invitations.php
+    * New home.php table for Available Players
 - [ ] As a Player, I want to invite another unengaged Player to start a game with me
 - [ ] As the Game, I want to prevent a Player from inviting other available Players to play after making an invitation to one
 - [ ] As the Game, I want to cancel all pending invitations when the Inviter logs out

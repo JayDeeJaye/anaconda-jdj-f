@@ -48,4 +48,13 @@ class SessionModel
 			}
 		}
 	}
+	
+	public function logout() {
+		$sql = "DELETE FROM sessions WHERE username = '".$this->userName."'";
+		if ($this->db->delete($sql)) {
+			$this->isConnected = false;
+			unset($this->sessionId);
+		}
+		return $this->isConnected;
+	}
 }

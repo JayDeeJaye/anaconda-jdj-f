@@ -4,6 +4,15 @@ session_start();
 require_once('../models/UserModel.php');
 require_once('../models/SessionModel.php');
 
+if (empty($_POST['username']) ||
+	empty($_POST['password']) ||
+	empty($_POST['passwordAgain'])) {
+
+	$_SESSION['infotext'] = 'All fields are required. Please try again';
+	header('Location: ../signup.php');
+	exit();
+}
+
 $username = $_POST['username'];
 $password = $_POST['password'];
 $confirmPwd = $_POST['passwordAgain'];

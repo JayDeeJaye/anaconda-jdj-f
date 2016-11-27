@@ -38,3 +38,16 @@ div.input-control button {
 	float: left;
 	margin-left: 35%;
 }
+
+.onlinePlayers {
+	width: 70%;
+	margin: auto;
+}
+
+.onlinePlayers td, th {
+	padding: 10px;
+}
+
+.onlinePlayers td~td {
+	text-align: right;
+}

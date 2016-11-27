@@ -30,6 +30,10 @@ class Database
 		}
 	}
 	
+	function delete($sql) {
+		return $this->dbConn->query($sql);
+	}
+	
 	// Close the connection when it's no longer referenced
 	function __destruct() {
 		$this->dbConn->close();
