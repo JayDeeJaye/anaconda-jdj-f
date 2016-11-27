@@ -31,6 +31,12 @@ I've broken down the project assignment into a list of requirements in the form 
     * signup.php (new user view)
     * handlers/register.php (UserModel class)
     * New Database class method: create
+  [ ] Refactor: encrypted password storage
+    * Store passwords in users with salt and SHA encryption
+    * Repeat encryption scheme when comparing passwords for authentication
+  [ ] Refactor: SessionModel reorganizaton
+    * Separate SessionModel class into its own file
+    * Add session state query to constructor
 - [x] As the Game, I want Players to ask to sign up from the launch page if they don't have a login already
     * "New Sign Up" button on index.php linking to signup.php  
 - [x] As the Game, I shall require all Players to have unique usernames
@@ -44,8 +50,12 @@ I've broken down the project assignment into a list of requirements in the form 
     * New view home.php
     * New session variable userName to indicate login status
     * New login and register flow to direct to home.php
-- [ ] As a Player, I want to see my name in a greeting in the Lobby
+- [x] As a Player, I want to see my name in a greeting in the Lobby
 - [ ] As a Player, I want to see who else is logged in and not engaged in a game
+    * New table: sessions
+    * New table: invitations
+    * New api: api/OnlinePlayers.php
+    * New api: api/Invitations.php
 - [ ] As a Player, I want to invite another unengaged Player to start a game with me
 - [ ] As the Game, I want to prevent a Player from inviting other available Players to play after making an invitation to one
 - [ ] As the Game, I want to cancel all pending invitations when the Inviter logs out

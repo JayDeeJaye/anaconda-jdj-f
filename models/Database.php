@@ -1,11 +1,11 @@
 <?php
-class Database {
-
+class Database 
+{
 	private $dbHost = "localhost";
 	private $dbName = "warzone";
 	private $dbUser = "warzone";
 	private $dbPassword = "";
-	protected $dbConn;
+	private $dbConn;
 	
 	// Connect to the database on instantiation
 	function __construct() {
@@ -23,7 +23,11 @@ class Database {
 	}
 	
 	function create($sql) {
-		return $this->dbConn->query($sql);
+		if ($this->dbConn->query($sql)) {
+			return $this->dbConn->insert_id;
+		} else {
+			return false;
+		}
 	}
 	
 	// Close the connection when it's no longer referenced

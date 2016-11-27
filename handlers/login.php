@@ -1,42 +1,14 @@
 <?php
 session_start();
-require_once('../model/database.php');
-
-class SessionModel {
-	public $userName;
-	public $sessionId;
-	public $isConnected;
-	
-	function __construct($name = null) {
-		if (!empty($name)) {
-			$this->userName = $name;
-		} else {
-			$this->userName = "";
-		}
-		$this->isConnected = false;
-	}
-	
-	function login($pwd) {
-		$this->isConnected = false;
-		$db = new Database();
-		$rows = $db->get("select username,password from users where username='$this->userName'");
-		if (count($rows) == 1) {
-			if ($pwd == $rows[0]['password']) {
-				$this->sessionId = session_id();
-				$this->status = "OK";
-				$this->isConnected = true;
-			}
-		} 
-	}
-}
+require_once('../models/SessionModel.php');
 
 $username = (empty($_POST['username'])) ? null : $_POST['username'];
 $password = (empty($_POST['password'])) ? null : $_POST['password'];
 
-$model = new SessionModel($username);
-$model->login($password);
+$user = new SessionModel($username);
+$user->login($password);
 
-if ($model->isConnected) {
+if ($user->isConnected) {
 	// go to the home dashboard
 	$_SESSION['userName'] = $username;
 	header("Location: ../home.php");
