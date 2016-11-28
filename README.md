@@ -55,13 +55,14 @@ I've broken down the project assignment into a list of requirements in the form 
     * New session variable userName to indicate login status
     * New login and register flow to direct to home.php
 - [x] As a Player, I want to see my name in a greeting in the Lobby
-- [ ] As a Player, I want to see who else is logged in and not engaged in a game
+- [x] As a Player, I want to see who else is logged in and not engaged in a game
     * New table: sessions
     * New table: invitations
     * New api: api/OnlinePlayers.php
-    * New api: api/Invitations.php
     * New home.php table for Available Players
 - [ ] As a Player, I want to invite another unengaged Player to start a game with me
+    * New api: api/Invitations.php
+    * New model: models/InvitationsModel.php
 - [ ] As the Game, I want to prevent a Player from inviting other available Players to play after making an invitation to one
 - [ ] As the Game, I want to cancel all pending invitations when the Inviter logs out
 - [ ] As an invited Player, I want to receive a notice of the invitation
@@ -69,7 +70,7 @@ I've broken down the project assignment into a list of requirements in the form 
 - [ ] As an invited Player, I want to be able to reject the invitation
 - [ ] As a Player whose invitation to play has been turned down, I want to be able to invite another player
 - [ ] As a Player whose invitation to play has been turned down, I want to receive notice of the rejection
-- [ ] As a Player whose invitation to play has been turned down, I want to receive notice of the acceptance
+- [ ] As a Player whose invitation to play has not been turned down, I want to receive notice of the acceptance
 - [ ] As two Players who have agreed to play, we want to be taken into the game arena
 
 

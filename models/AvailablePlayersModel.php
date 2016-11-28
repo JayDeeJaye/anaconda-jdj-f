@@ -11,7 +11,7 @@ class OnlinePlayer implements JsonSerializable
 		return (object) $result;
 	}
 }
-class OnlinePlayersModel
+class AvailablePlayersModel
 {
 	private $dbConn;
 	
@@ -24,6 +24,11 @@ class OnlinePlayersModel
 		$sql = <<<SQL
 			SELECT s.username
 			FROM sessions s
+			WHERE s.username NOT IN (
+				SELECT i1.from_user FROM invitations i1 
+				UNION
+				SELECT i2.to_user FROM invitations i2
+			)
 SQL;
 		$rows = $this->dbConn->get($sql);
 		if (count($rows) > 0) {

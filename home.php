@@ -37,7 +37,7 @@ if (empty($_SESSION['userName'])) {
 			}
 
 			$(document).ready(function() {
-			    $.getJSON("apis/OnlinePlayers.php",
+			    $.getJSON("apis/AvailablePlayers.php",
 		    	    function(data) {
 		    	    	$('#tabOnlinePlayers tr').slice(1).remove();
 						players = new Object();
