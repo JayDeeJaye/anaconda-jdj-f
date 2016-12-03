@@ -31,9 +31,28 @@ if (empty($_SESSION['userName'])) {
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script>
-
+			// current username
+			var me = "<?php echo $_SESSION['userName'] ?>";
+			
 			function showAjaxError (jqxhr, textStatus, thrownError) {
-			    alert((typeof jqxhr.responseJSON) === "undefined" ? jqxhr.responseText : jqxhr.responseJSON.error);
+			    alert((typeof jqxhr.responseJSON) === "undefined" ? jqxhr.responseText : jqxhr.responseJSON.error, true);
+			}
+
+			function invitePlayer(name) {
+				alert(name+" is being invited.");
+				var newInvitation = new Object();
+				newInvitation.inviter = me;
+				newInvitation.invited = name;
+
+				$.ajax({
+			        method: "POST",
+			        url: "apis/Invitations.php/",
+			        data: JSON.stringify(newInvitation)
+			    })
+			    .done(function( data ) {
+			        alert("Invitation has been stored!")
+			    })
+			    .fail(showAjaxError);
 			}
 
 			$(document).ready(function() {
@@ -48,7 +67,7 @@ if (empty($_SESSION['userName'])) {
 			    	        }
 			    	        var html = '<tr>' +
 			    	        		   '<td>' + players[i].userName + '</td>' +
-			    	        		   '<td><button>Invite to Play</button></td>' +
+			    	        		   "<td><button onclick=\"invitePlayer('"+players[i].userName+"')\">Invite to Play</button></td>" +
 			    	        		   '</tr>';
 							$("#tabOnlinePlayers").append(html);
 		    	        }

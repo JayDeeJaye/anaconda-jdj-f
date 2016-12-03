@@ -15,9 +15,12 @@ class Database
 	// Execute a query and return all results in an array of associative arrays
 	function get($sql) {
 		$result = array();
-		$res = $this->dbConn->query($sql);
-		while ($row = $res->fetch_assoc()) {
-			$result[] = $row;
+		if ($res = $this->dbConn->query($sql)) {
+			while ($row = $res->fetch_assoc()) {
+				$result[] = $row;
+			}
+		} else {
+			throw new Exception(mysqli_error($this->dbConn));
 		}
 		return $result;
 	}
@@ -26,12 +29,16 @@ class Database
 		if ($this->dbConn->query($sql)) {
 			return $this->dbConn->insert_id;
 		} else {
-			return false;
+			throw new Exception(mysqli_error($this->dbConn));
 		}
 	}
 	
 	function delete($sql) {
-		return $this->dbConn->query($sql);
+		if ($this->dbConn->query($sql)) {
+			return true;
+		} else {
+			throw new Exception(mysqli_error($this->dbConn));
+		}
 	}
 	
 	// Close the connection when it's no longer referenced

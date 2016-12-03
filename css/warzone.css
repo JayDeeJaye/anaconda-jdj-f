@@ -51,3 +51,7 @@ div.input-control button {
 .onlinePlayers td~td {
 	text-align: right;
 }
+
+.errormsg {
+	color: red;
+}

@@ -17,8 +17,10 @@
 						header("Content-Type: application/json",null,"200");
 					}
 				} catch (Exception $e) {
-					// TODO: differentiate between 404 (not found) and 500 (system error)
-					throw new Exception($e->getMessage(),500);
+					if (!$responseCode = $e->getCode()) {
+						$responseCode = 500;
+					}
+					throw new Exception($e->getMessage(),$responseCode);
 				}
 			}
 			break;

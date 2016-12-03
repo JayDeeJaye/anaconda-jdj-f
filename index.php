@@ -11,8 +11,7 @@
 		
 		<div style="overflow:auto; border: 1px solid green; padding:2%; width:500px; margin: auto;">
 			<div class="form-heading" align="center">
-				<p>Login to join a game session</p>
-				<span style="color:red;">
+				<span class="errormsg">
 					<?php 
 						if (empty($_SESSION['infotext'])) {
 							echo '<p>&nbsp;</p>';
@@ -21,6 +20,7 @@
 						}
 					?>
 				</span>
+				<p>Login to join a game session</p>
 			</div>
 			<form action="handlers/login.php" method="post">
 				<div class="input-group">

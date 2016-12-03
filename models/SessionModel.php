@@ -55,6 +55,6 @@ class SessionModel
 			$this->isConnected = false;
 			unset($this->sessionId);
 		}
-		return $this->isConnected;
+		return !$this->isConnected;
 	}
 }

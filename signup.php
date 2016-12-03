@@ -12,7 +12,7 @@
 		<div style="overflow:auto; border: 1px solid green; padding:2%; width:500px; margin: auto;">
 			<div class="form-heading" align="center">
 				<p>New User Signup</p>
-				<span style="color:red;">
+				<span class="errormsg">
 					<?php 
 						if (empty($_SESSION['infotext'])) {
 							echo '<p>&nbsp;</p>';

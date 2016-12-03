@@ -16,40 +16,32 @@ if (empty($_POST['username']) ||
 $username = $_POST['username'];
 $password = $_POST['password'];
 $confirmPwd = $_POST['passwordAgain'];
-	
-$user = new UserModel($username,$password);
-if ($user->exists()) {
-	$_SESSION['infotext'] = $username.' exists already. Please pick another username';
-	// TODO: generate a full absolute location, such as
-	/* Redirect to a different page in the current directory that was requested */
-	// 	$host  = $_SERVER['HTTP_HOST'];
-	// 	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-	// 	$extra = 'mypage.php';
-	// 	header("Location: http://$host$uri/$extra");
-	// 	exit;
-		
-	header('Location: ../signup.php');
-	exit();
-}
 
-if (!$user->passwordMatches($confirmPwd)) {
-	$_SESSION['infotext'] = 'Passwords do not match. Please try again';
-	header('Location: ../signup.php');
-	exit();
-}	
+// Stay here unless we get a valid registration and login
+$url = '../signup.php';
 
-if ($user->register()) {
-	// Start up the new user's session
-	$session = new SessionModel($username);
-	$session->login($password);
-	
-	if ($session->isConnected) {
-	// Go into the dashboard
-		$_SESSION['userName'] = $username;
-		header('Location: ../home.php');
-		exit();
+try {
+	$user = new UserModel($username,$password);
+	if ($user->exists()) {
+		throw new Exception("$username exists already. Please pick another username");
 	}
+	
+	if (!$user->passwordMatches($confirmPwd)) {
+		throw new Exception("Passwords do not match. Please try again");
+	}	
+	
+	if ($user->register()) {
+		// Start up the new user's session
+		$session = new SessionModel($username);
+		$session->login($password);
+		
+		if ($session->isConnected) {
+		// Go into the dashboard
+			$_SESSION['userName'] = $username;
+			$url = '../home.php';
+		}
+	}
+} catch (Exception $e) {
+	$_SESSION['infotext'] = $e->getMessage();
 }
-
-$_SESSION['infotext'] = 'Oops! Something bad happened. Contact the administrator';
-header('Location: ../signup.php');
+header("Location: $url");

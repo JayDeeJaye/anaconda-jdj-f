@@ -60,9 +60,11 @@ I've broken down the project assignment into a list of requirements in the form 
     * New table: invitations
     * New api: api/OnlinePlayers.php
     * New home.php table for Available Players
-- [ ] As a Player, I want to invite another unengaged Player to start a game with me
+- [x] As a Player, I want to invite another unengaged Player to start a game with me
     * New api: api/Invitations.php
     * New model: models/InvitationsModel.php
+    * home.php: new function invitePlayer()
+    * home.php: invitePlayer() added to "Invite to Play" button
 - [ ] As the Game, I want to prevent a Player from inviting other available Players to play after making an invitation to one
 - [ ] As the Game, I want to cancel all pending invitations when the Inviter logs out
 - [ ] As an invited Player, I want to receive a notice of the invitation
