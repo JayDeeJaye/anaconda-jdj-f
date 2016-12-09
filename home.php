@@ -39,7 +39,6 @@ if (empty($_SESSION['userName'])) {
 			}
 
 			function invitePlayer(name) {
-				alert(name+" is being invited.");
 				var newInvitation = new Object();
 				newInvitation.inviter = me;
 				newInvitation.invited = name;
@@ -50,30 +49,62 @@ if (empty($_SESSION['userName'])) {
 			        data: JSON.stringify(newInvitation)
 			    })
 			    .done(function( data ) {
-			        alert("Invitation has been stored!")
+					
 			    })
 			    .fail(showAjaxError);
 			}
 
+			function makePlayerButton(name,label) {
+				return '<tr>' +
+	     		   '<td>' + name + '</td>' +
+	     		   "<td><button id=\"p_"+name+"\" class=\"btn_invite\">"+label+"</button></td>" +
+	     		   '</tr>'
+				}
+
 			$(document).ready(function() {
-			    $.getJSON("apis/AvailablePlayers.php",
+
+				$.getJSON("apis/OnlinePlayers.php",
 		    	    function(data) {
 		    	    	$('#tabOnlinePlayers tr').slice(1).remove();
 						players = new Object();
 	    	        	players = JSON.parse(JSON.stringify(data));
-		    	        for(var i = 0; i < players.length; i++) {
-			    	        if (players[i].userName == '<?php echo $_SESSION["userName"]; ?>') {
+		    	        for(var i in players) {
+							var p = players[i];
+			    	        if (p.name == me) {
 				    	        continue;
 			    	        }
-			    	        var html = '<tr>' +
-			    	        		   '<td>' + players[i].userName + '</td>' +
-			    	        		   "<td><button onclick=\"invitePlayer('"+players[i].userName+"')\">Invite to Play</button></td>" +
-			    	        		   '</tr>';
-							$("#tabOnlinePlayers").append(html);
+							var html;
+			    	        switch(p.status) {
+				    	        case "INVITING":
+					    	        continue;
+					    	        break;
+				    	        case "AVAILABLE":
+				    	        	html = makePlayerButton(p.name,"Invite to Play");
+				    	        	break;
+				    	        case "INVITED":
+					    	        if (p.invitedBy == me) {
+					    	        	html = makePlayerButton(p.name,"Waiting...");
+					    	        } else {
+						    	        continue;
+					    	        }
+			    	        }     
+    	        		   $("#tabOnlinePlayers").append(html);
 		    	        }
 		    	    })
 		    	    .fail(showAjaxError);
 	    	});
+
+			// Invitation button handler
+			$("#tabOnlinePlayers").on("click", "button.btn_invite", function () {
+ 				var p = this.id.split("_")[1];
+ 				invitePlayer(p);
+ 				this.innerHTML="Waiting...";
+ 				$(".btn_invite").each( function (i) {
+     				$(this).attr("disabled",true);
+ 				});
+//				alert("Click!");
+			});
+
 		</script>
 	</body>
 </html>

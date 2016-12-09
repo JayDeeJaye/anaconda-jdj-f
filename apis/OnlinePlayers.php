@@ -1,8 +1,8 @@
 <?php
 	require_once('apiHeader.php');
-	require_once('../models/AvailablePlayersModel.php');
+	require_once('../models/OnlinePlayersModel.php');
 
-	$onlinePlayers = new AvailablePlayersModel();
+	$onlinePlayers = new OnlinePlayersModel();
 	
 	switch($verb) {
 	
