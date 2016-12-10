@@ -21,16 +21,16 @@ $confirmPwd = $_POST['passwordAgain'];
 $url = '../signup.php';
 
 try {
-	$user = new UserModel($username,$password);
-	if ($user->exists()) {
+	$userSession = new UserModel($username,$password);
+	if ($userSession->exists()) {
 		throw new Exception("$username exists already. Please pick another username");
 	}
 	
-	if (!$user->passwordMatches($confirmPwd)) {
+	if (!$userSession->passwordMatches($confirmPwd)) {
 		throw new Exception("Passwords do not match. Please try again");
 	}	
 	
-	if ($user->register()) {
+	if ($userSession->register()) {
 		// Start up the new user's session
 		$session = new SessionModel($username);
 		$session->login($password);

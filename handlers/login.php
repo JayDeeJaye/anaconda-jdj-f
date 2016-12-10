@@ -7,10 +7,13 @@ $password = (empty($_POST['password'])) ? null : $_POST['password'];
 
 $url = '../index.php';
 try {
-	$user = new SessionModel($username);
-	$user->login($password);
-
-	if ($user->isConnected) {
+	$userSession = new SessionModel($username);
+	if ($userSession->isConnected) {
+		$_SESSION['infotext'] = 'Reconnected to existing session.';
+	}
+	$userSession->login($password);
+	
+	if ($userSession->isConnected) {
 		// go to the home dashboard
 		$_SESSION['userName'] = $username;
 		$url = '../home.php';

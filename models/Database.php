@@ -33,6 +33,15 @@ class Database
 		}
 	}
 	
+	/**
+	 * Execute a delete statement against the database
+	 * 
+	 * @param string $sql The DELETE statement to execute
+	 * 
+	 * @throws Exception Error thrown by the statement, if any
+	 * 
+	 * @return boolean If true, the statement succeeded, false otherwise
+	 */
 	function delete($sql) {
 		if ($this->dbConn->query($sql)) {
 			return true;

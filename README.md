@@ -65,8 +65,11 @@ I've broken down the project assignment into a list of requirements in the form 
     * New model: models/InvitationsModel.php
     * home.php: new function invitePlayer()
     * home.php: invitePlayer() added to "Invite to Play" button
-- [ ] As the Game, I want to prevent a Player from inviting other available Players to play after making an invitation to one
-- [ ] As the Game, I want to cancel all pending invitations when the Inviter logs out
+- [x] As the Game, I want to prevent a Player from inviting other available Players to play after making an invitation to one
+	* home.php: invitation button click handler disables all other invitation buttons when activated
+- [x] As the Game, I want to cancel all pending invitations when the Inviter logs out
+	* InvitationModel: new method cancel()
+	* logout.php: updated workflow to include checking for and removing open invitations by player
 - [ ] As an invited Player, I want to receive a notice of the invitation
 - [ ] As an invited Player, I want to be able to accept the invitation
 - [ ] As an invited Player, I want to be able to reject the invitation

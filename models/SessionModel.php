@@ -23,7 +23,6 @@ class SessionModel
 		$rows = $this->db->get("SELECT id,username FROM sessions WHERE username='$this->userName'");
 		if (count($rows) > 0) {
 			$this->sessionId = $rows[0]['id'];
-			$this->status = "OK";
 			$this->isConnected = true;
 		}
 	}
@@ -39,16 +38,24 @@ class SessionModel
 
 	public function login($pwd) {
 		// TODO: Add password encryption
-		$this->isConnected = false;
+// 		$this->isConnected = false;
 		$rows = $this->db->get("SELECT username,password FROM users WHERE username='$this->userName'");
 		if (count($rows) == 1) {
 			if ($pwd == $rows[0]['password']) {
-				$this->status = "OK";
-				$this->isConnected = $this->addSession();
+				if (!$this->isConnected) {
+					$this->isConnected = $this->addSession();
+				}
+			} else {
+				$this->isConnected = false;
 			}
 		}
 	}
 	
+	/**
+	 * Remove the session from the database, cleaning up all related data and effectively logging the user out
+	 * 
+	 * @return boolean Returns true if the session was successfully cleaned up  
+	 */
 	public function logout() {
 		$sql = "DELETE FROM sessions WHERE username = '".$this->userName."'";
 		if ($this->db->delete($sql)) {

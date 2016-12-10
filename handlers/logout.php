@@ -1,15 +1,21 @@
 <?php
 session_start();
 require_once('../models/SessionModel.php');
+require_once('../models/InvitationModel.php');
 
 $username = $_SESSION['userName'];
 
 try {
-	$user = new SessionModel($username);
+	$userSession = new SessionModel($username);
 
-	if ($user->isConnected) {
+	if ($userSession->isConnected) {
+		// Clean up any outstanding invitations by this player
+		$invitation = new InvitationModel($username);
+		if (!empty($invitation->invitedPlayer)) {
+			$invitation->cancel();
+		}
 		// Delete all session data and return to the sign-in page
-		if ($user->logout()) {
+		if ($userSession->logout()) {
 			$_SESSION['infotext'] = "See you later, $username. Have a nice day!";
 		} else {
 			throw new Exception ("Oops! Something bad happened. Contact the administrator");

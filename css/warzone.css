@@ -55,3 +55,7 @@ div.input-control button {
 .errormsg {
 	color: red;
 }
+
+.infomsg {
+	color: green;
+}

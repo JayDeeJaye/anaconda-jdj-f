@@ -18,6 +18,15 @@ if (empty($_SESSION['userName'])) {
 		<div style="overflow:auto; border: 1px solid green; padding:2%; width:500px; margin: auto;">
 			<div class="form-heading" align="center">
 				<h1>Welcome, <?php echo $_SESSION['userName'] ?> </h1>
+				<span class="infomsg">
+					<?php 
+						if (empty($_SESSION['infotext'])) {
+							echo '<p>Let\'s start something</p>';
+						} else {
+							echo '<p> '.$_SESSION['infotext'].' </p>';
+						}
+					?>
+				</span>
  			</div>
  			<table class="onlinePlayers" id="tabOnlinePlayers">
  			<tr>
@@ -66,7 +75,7 @@ if (empty($_SESSION['userName'])) {
 				$.getJSON("apis/OnlinePlayers.php",
 		    	    function(data) {
 		    	    	$('#tabOnlinePlayers tr').slice(1).remove();
-						players = new Object();
+						var players = new Object();
 	    	        	players = JSON.parse(JSON.stringify(data));
 		    	        for(var i in players) {
 							var p = players[i];
