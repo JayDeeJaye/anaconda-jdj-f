@@ -44,14 +44,15 @@ class OnlinePlayersModel
 				$p = new OnlinePlayer();
 				$p->name = $rows[$i]['username'];
 
-				// Has this player invited anyone?
+				// Is this player involved in an invitation?
 				$invitation = new InvitationModel($p->name);
-				if (!empty($invitation->invitedPlayer)) {
-					$p->status = self::ST_INVTG;
-				} elseif ($invitation->isInvited()) {
-					$p->status = self::ST_INVTD;
-				} else {
+				if ($invitation->status == InvitationModel::INV_ST_NONE) {
 					$p->status = self::ST_AVAIL;
+				} elseif ($invitation->toPlayer == $p->name) {
+					$p->status = self::ST_INVTD;
+					$p->invitedBy = $invitation->fromPlayer;
+				} elseif (!empty($invitation->toPlayer)) {
+					$p->status = self::ST_INVTG;
 				}
 				array_push($data, $p);
 			}

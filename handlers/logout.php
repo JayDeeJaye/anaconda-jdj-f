@@ -11,7 +11,7 @@ try {
 	if ($userSession->isConnected) {
 		// Clean up any outstanding invitations by this player
 		$invitation = new InvitationModel($username);
-		if (!empty($invitation->invitedPlayer)) {
+		if (!empty($invitation->toPlayer)) {
 			$invitation->cancel();
 		}
 		// Delete all session data and return to the sign-in page
