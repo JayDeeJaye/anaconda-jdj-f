@@ -1,4 +1,7 @@
 <?php
+/*
+ * logout handler. Clean up session state and outstanding invitations
+ */
 session_start();
 require_once('../models/SessionModel.php');
 require_once('../models/InvitationModel.php');
@@ -14,7 +17,7 @@ try {
 		if (!empty($invitation->toPlayer)) {
 			$invitation->cancel();
 		}
-		// Delete all session data and return to the sign-in page
+		// Delete all relevant session data and return to the sign-in page
 		if ($userSession->logout()) {
 			$_SESSION['infotext'] = "See you later, $username. Have a nice day!";
 		} else {

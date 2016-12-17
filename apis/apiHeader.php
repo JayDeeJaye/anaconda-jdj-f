@@ -11,6 +11,7 @@ set_exception_handler(function ($e) {
 // Get the request verb
 $verb = $_SERVER['REQUEST_METHOD'];
 
+// Get the api route keys from the url for GET, PUT, and DELETE
 switch($verb) {
     case 'GET':
     case 'PUT':
@@ -21,6 +22,7 @@ switch($verb) {
     $url_pieces = explode('/', $my_path_info);
 }
 
+// Get the data from the PUT and POST requests 
 switch($verb) {
     case 'PUT':
     case 'POST':

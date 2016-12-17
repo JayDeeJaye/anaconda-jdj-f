@@ -1,4 +1,8 @@
 <?php
+/*
+ * OnlinePlayers API. Query the list of players online via RESTful api
+ */
+
 	require_once('apiHeader.php');
 	require_once('../models/OnlinePlayersModel.php');
 

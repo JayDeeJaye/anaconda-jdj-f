@@ -1,4 +1,7 @@
 <?php
+/*
+ * Signup handler. Create new user and sign her in
+ */
 
 session_start();
 require_once('../models/UserModel.php');

@@ -1,5 +1,9 @@
 <?php
-	require_once('apiHeader.php');
+/*
+ * Invitations API. Query and manipulate invitations via RESTful api
+ */
+
+    require_once('apiHeader.php');
 	require_once('../models/InvitationModel.php');
 
 	switch($verb) {
@@ -19,7 +23,7 @@
 					}
 					throw new Exception($e->getMessage(),$responseCode);
 				}
-			}
+			} // GET all not implemented
 			break;
 
 		case 'POST':
@@ -62,7 +66,7 @@
 		default:
 			throw new Exception("$verb not implemented","405");
 	}
-	// send the response
+	// send the data in the response if there is any
 	
 	if (isset($data)) {
 		echo json_encode($data,JSON_PRETTY_PRINT);

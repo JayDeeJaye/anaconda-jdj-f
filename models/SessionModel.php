@@ -1,4 +1,7 @@
 <?php
+/*
+ * Data model for managing sessions
+ */
 require_once('../models/Database.php');
 
 class SessionModel 
@@ -8,6 +11,8 @@ class SessionModel
 	public $sessionId;
 	private $db;
 
+	// When instantiating the session model, see if there is an existing
+	// session and set the state of the instance accordingly
 	public function __construct($name = null) {
 		if (!empty($name)) {
 			$this->userName = $name;
@@ -27,6 +32,7 @@ class SessionModel
 		}
 	}
 	
+	// create the session in the database
 	private function addSession() {
 		$sql = "INSERT INTO sessions (username) VALUES ('".$this->userName."')";
 		if ($this->sessionId = $this->db->create($sql)) {
@@ -36,6 +42,8 @@ class SessionModel
 		}
 	}
 
+	// Verify the given password, and create a session if it matches what's
+	// in the database for the user
 	public function login($pwd) {
 		$rows = $this->db->get("SELECT username,password FROM users WHERE username='$this->userName'");
 		if (count($rows) == 1) {
@@ -48,12 +56,8 @@ class SessionModel
 			}
 		}
 	}
-	
-	/**
-	 * Remove the session from the database, cleaning up all related data and effectively logging the user out
-	 * 
-	 * @return boolean Returns true if the session was successfully cleaned up  
-	 */
+
+	// remove the session from the database and set the session instance state
 	public function logout() {
 		$sql = "DELETE FROM sessions WHERE username = '".$this->userName."'";
 		if ($this->db->delete($sql)) {

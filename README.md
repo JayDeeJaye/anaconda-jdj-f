@@ -43,7 +43,7 @@ I've broken down the project assignment into a list of requirements in the form 
     * New UserModel method: exists
 - [x] As the Game, I want Players to type their password twice exactly the same way in order to complete the signup process
     * New UserModel method: passwordMatches
-- [ ] As the Game, I shall allow a Player to be logged in only once from a single location or browser instance
+- [x] As the Game, I shall allow a Player to be logged in only once from a single location or browser instance
 - [x] As a Player, I want to completely sign out of the game, by using Logout
     * New handler: handlers/logout.php
     * New SessionModel method logout
@@ -70,12 +70,12 @@ I've broken down the project assignment into a list of requirements in the form 
 - [x] As the Game, I want to cancel all pending invitations when the Inviter logs out
 	* InvitationModel: new method cancel()
 	* logout.php: updated workflow to include checking for and removing open invitations by player
-- [ ] As an invited Player, I want to receive a notice of the invitation
-- [ ] As an invited Player, I want to be able to accept the invitation
-- [ ] As an invited Player, I want to be able to reject the invitation
-- [ ] As a Player whose invitation to play has been turned down, I want to be able to invite another player
-- [ ] As a Player whose invitation to play has been turned down, I want to receive notice of the rejection
-- [ ] As a Player whose invitation to play has not been turned down, I want to receive notice of the acceptance
-- [ ] As two Players who have agreed to play, we want to be taken into the game arena
+- [x] As an invited Player, I want to receive a notice of the invitation
+- [x] As an invited Player, I want to be able to accept the invitation
+- [x] As an invited Player, I want to be able to reject the invitation
+- [x] As a Player whose invitation to play has been turned down, I want to be able to invite another player
+- [x] As a Player whose invitation to play has been turned down, I want to receive notice of the rejection
+- [x] As a Player whose invitation to play has not been turned down, I want to receive notice of the acceptance
+- [x] As two Players who have agreed to play, we want to be taken into the game arena
 
 

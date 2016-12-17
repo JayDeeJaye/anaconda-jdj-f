@@ -1,4 +1,8 @@
 <?php
+/*
+ * login handler. Uses SessionModel to query and set the state
+ * of the session for the given user
+ */
 session_start();
 require_once('../models/SessionModel.php');
 

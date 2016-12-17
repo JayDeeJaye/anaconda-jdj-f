@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 27, 2016 at 04:05 PM
+-- Generation Time: Dec 16, 2016 at 09:07 PM
 -- Server version: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `warzone`
 --
-CREATE DATABASE IF NOT EXISTS `warzone` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `warzone`;
 
 -- --------------------------------------------------------
 
@@ -28,14 +26,13 @@ USE `warzone`;
 -- Table structure for table `invitations`
 --
 
-DROP TABLE IF EXISTS `invitations`;
 CREATE TABLE IF NOT EXISTS `invitations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `from_user` varchar(30) NOT NULL,
   `to_user` varchar(30) NOT NULL,
-  `status` varchar(30) NOT NULL,
+  `invitation_status` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 -- --------------------------------------------------------
 
@@ -43,21 +40,11 @@ CREATE TABLE IF NOT EXISTS `invitations` (
 -- Table structure for table `sessions`
 --
 
-DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Internal session id',
   `username` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
-
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `username`) VALUES
-(7, 'calvin'),
-(8, 'susie'),
-(9, 'calvin');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
 
 -- --------------------------------------------------------
 
@@ -65,13 +52,12 @@ INSERT INTO `sessions` (`id`, `username`) VALUES
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Internal ID of user',
   `username` varchar(30) NOT NULL COMMENT 'Login username',
   `password` varchar(255) NOT NULL COMMENT 'Password for user',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `users`
@@ -82,7 +68,8 @@ INSERT INTO `users` (`id`, `username`, `password`) VALUES
 (2, 'scott', 'tiger'),
 (3, 'hobbes', 'waterson'),
 (5, 'calvin', 'gross'),
-(6, 'susie', 'bunny');
+(6, 'susie', 'bunny'),
+(7, 'snoopy', 'supperdish');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

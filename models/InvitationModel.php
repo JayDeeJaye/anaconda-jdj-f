@@ -2,8 +2,6 @@
 require_once('../models/Database.php');
 
 /**
- * @author Julianne d. Johnson
- * 
  * Invitation domain model
  * 
  * Instantiate with a single player to find an invitation in which she is involved
@@ -25,7 +23,7 @@ class InvitationModel
 	const INV_ST_REJECTED = 'rejected';
 	const INV_ST_COMPLETED = 'gameon';
 	
-	// construct gets the current state of the invitation
+	// construct method gets the current state of the invitation
 	// An invitation model instance has an inviter, an invitee, and a status
 	// An instance can be in an optimistic state, so that the instance 
 	// can show that a player has not invited anyone yet.

@@ -1,4 +1,8 @@
 <?php
+/*
+ * Data model for querying and reporting on the state of
+ * all players logged into the game system
+ */
 require_once('../models/Database.php');
 require_once('../models/InvitationModel.php');
 
@@ -27,16 +31,6 @@ class OnlinePlayersModel
 
 	function findAll () {
 		$data = array();
-// 		$sql = <<<SQL
-// 			SELECT s.username
-// 			FROM sessions s
-// 			WHERE s.username NOT IN (
-// 				SELECT i1.from_user FROM invitations i1 
-// 				UNION
-// 				SELECT i2.to_user FROM invitations i2
-// 			)
-// SQL;
-
 		$sql = "SELECT username FROM sessions";
 		$rows = $this->dbConn->get($sql);
 		if (count($rows) > 0) {
@@ -59,5 +53,4 @@ class OnlinePlayersModel
 		}
 		return $data;
 	}
-	
 }

@@ -1,4 +1,7 @@
 <?php
+/*
+ * Data model for managing users
+ */
 require_once('../models/Database.php');
 
 class UserModel 
