@@ -1,6 +1,15 @@
 <?php
 require_once('../models/Database.php');
 
+/**
+ * @author Julianne d. Johnson
+ * 
+ * Invitation domain model
+ * 
+ * Instantiate with a single player to find an invitation in which she is involved
+ * Instantiate with a pair to create an invitation, or find the state of an invitation between these two players
+ *
+ */
 class InvitationModel 
 {
 	public $invitationId;
@@ -12,6 +21,9 @@ class InvitationModel
 	
 	const INV_ST_PENDING = 'pending';
 	const INV_ST_NONE = 'none';
+	const INV_ST_ACCEPTED = 'accepted';
+	const INV_ST_REJECTED = 'rejected';
+	const INV_ST_COMPLETED = 'gameon';
 	
 	// construct gets the current state of the invitation
 	// An invitation model instance has an inviter, an invitee, and a status
@@ -22,7 +34,13 @@ class InvitationModel
 		$this->fromPlayer = $fromPlayer;
 		$this->toPlayer = $toPlayer;
 		$this->status = self::INV_ST_NONE;
-		$this->getInvitation();
+		
+		//Check the state of this invitation as is.
+		if (!$this->getInvitation()) {
+			if (empty($this->toPlayer)) {
+				$this->getInvited();
+			}
+		}
 	}
 	
 	function invitePlayer() {
@@ -32,7 +50,7 @@ class InvitationModel
 	}
 	
 	function getInvitation() {
-		$sql = "SELECT from_user,to_user,invitation_status ".
+		$sql = "SELECT id,from_user,to_user,invitation_status ".
 			   "FROM invitations ".
 			   "WHERE from_user = '$this->fromPlayer' ".
 			   "AND to_user LIKE ".(empty($this->toPlayer) ? "'%'" : "'$this->toPlayer'");
@@ -40,8 +58,10 @@ class InvitationModel
 		if (count($rows) > 0) {
 			$this->toPlayer = $rows[0]['to_user'];
 			$this->status = $rows[0]['invitation_status'];
+			$this->invitationId = $rows[0]['id'];
+			return true;
 		} else {
-			$this->getInvited();
+			return false;
 		}
 	}
 	
@@ -53,25 +73,29 @@ class InvitationModel
 	}
 	
 	function getInvited() {
-		$sql = "SELECT from_user,to_user,invitation_status FROM invitations WHERE to_user = '$this->fromPlayer'";
+		$sql = "SELECT id,from_user,to_user,invitation_status FROM invitations WHERE to_user = '$this->fromPlayer'";
 		$rows = $this->db->get($sql);
 		if (count($rows) > 0) {
 			$this->fromPlayer = $rows[0]['from_user'];
 			$this->toPlayer = $rows[0]['to_user'];
 			$this->status = $rows[0]['invitation_status'];
+			$this->invitationId = $rows[0]['id'];
 		}
 	}
 	
-	
-	/**
-	 * Cancel all invitations for the inviter (invitedBy)
-	 * 
-	 * @param void
-	 * 
-	 * @return void
-	 */
+	 //Cancel all invitations for the inviter (fromPlayer)
 	function cancel() {
 		$sql = "DELETE FROM invitations WHERE from_user = '$this->fromPlayer'";
 		$this->db->delete($sql);
+	}
+	
+	// update the database with the current model state
+	function update() {
+		$sql = "UPDATE invitations SET ".
+			   "       from_user = '$this->fromPlayer',".
+			   "	   to_user = '$this->toPlayer',".
+			   "	   invitation_status = '$this->status' ".
+			   "WHERE id = $this->invitationId";
+		$this->db->update($sql);
 	}
 }

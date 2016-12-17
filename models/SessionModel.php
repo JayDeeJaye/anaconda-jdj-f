@@ -37,8 +37,6 @@ class SessionModel
 	}
 
 	public function login($pwd) {
-		// TODO: Add password encryption
-// 		$this->isConnected = false;
 		$rows = $this->db->get("SELECT username,password FROM users WHERE username='$this->userName'");
 		if (count($rows) == 1) {
 			if ($pwd == $rows[0]['password']) {

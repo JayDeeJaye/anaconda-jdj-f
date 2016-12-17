@@ -21,7 +21,6 @@ class UserModel
 
 	function register() {
 		// Insert a new user record into the database
-		// TODO: encrypt passwords in the database
 		$sql = "INSERT INTO users (username,password) VALUES ('".$this->userName."', '".$this->password."')";
 		return $this->db->create($sql);
 	}

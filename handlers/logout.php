@@ -24,4 +24,5 @@ try {
 } catch (Exception $e) {
 	$_SESSION['infotext'] = $e->getMessage();
 }
+unset($_SESSION['userName']);
 header('Location: ../index.php');
